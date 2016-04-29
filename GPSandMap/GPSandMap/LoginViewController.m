@@ -58,11 +58,11 @@
     self.phoneNumberTextField.delegate = self;
     
     //郭晓宇服务器IP，Port
-    self.socketHostTextField.text = @"219.218.126.166";
+    self.socketHostTextField.text = @"219.218.126.140";
     self.socketPortTextField.text = @"20002";
     
     //用户名，密码
-    self.userNameTextField.text = @"zhoujingtao";
+    self.userNameTextField.text = @"gxy3k";
     self.userKeywordTextField.text = @"gxy3k";
     self.phoneNumberTextField.text = @"18769781618";
     

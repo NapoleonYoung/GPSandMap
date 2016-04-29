@@ -56,9 +56,41 @@
     
     self.dataString = @"";
 
+    //[self checkMapViewAppolyline];
 }
 
-
+/**
+ *  检查地图轨迹显示功能是否正常
+ */
+- (void)checkMapViewAppolyline
+{
+    NSUInteger countOfDataReceived;
+    
+    CLLocationCoordinate2D *coordinates = (CLLocationCoordinate2D *)malloc(countOfDataReceived * sizeof(CLLocationCoordinate2D));
+    //添加自定义经纬度坐标，检查地图显示轨迹功能是否正常
+    
+    countOfDataReceived = 4;
+    
+    coordinates[0].latitude = 36.673222;
+    coordinates[0].longitude = 117.059456;
+    coordinates[1].latitude = 36.673222;
+    coordinates[1].longitude = 117.059456;
+    coordinates[2].latitude = 36.673222;
+    coordinates[2].longitude = 117.059456;
+    coordinates[3].latitude = 36.673222;
+    coordinates[3].longitude = 117.053457;
+    /*
+    //检查所有的坐标是否符合要求，如果不符合要求，就将改点设为前一个符合要求的点的坐标
+    for (int i=1; i<countOfDataReceived; i++) {
+        //我国经纬度的范围：纬度：3～53；经度：73～136
+        if ((coordinates[i].latitude < 3) || (coordinates[i].latitude > 54) || (coordinates[i].longitude < 73)|| (coordinates[i].longitude > 136)) {
+            
+            coordinates[i] = coordinates[i-1];
+        }
+    }*/
+    
+    [self addPolylinesToMapWithPolylinesCoordinates:coordinates coordinatesCount:4];
+}
 
 //视图出现的时候监听通知
 - (void)viewWillAppear:(BOOL)animated
@@ -105,22 +137,33 @@
     self.dataString = [self.dataString stringByAppendingString:receivedString];
     
     if ([[self.dataString substringToIndex:7] isEqualToString:@"{\"data\""] && [[self.dataString substringFromIndex:(self.dataString.length - 2)] isEqualToString:@"]}"]) {//首先判断数据结构是否完整
-        
+        NSLog(@"最终得到的GPS数据是：%@", self.dataString);
         NSData *fullData = [self.dataString dataUsingEncoding:NSUTF8StringEncoding];//将数据转换成NSData
         NSDictionary *results = [NSJSONSerialization JSONObjectWithData:fullData options:NSJSONReadingMutableContainers error:NULL];//通过接收到的json数据获得NSDictionary
-        
+
+        //接收到的数据字典中的数据放到一个数组里，其中包括了各种response情况，例如response=159，response=160等等，由于只有response＝160时，才是在地图上能够显示的数据，因此需要将数组中response＝160的数据取出，其余的数据去除
         NSArray *commandReceived = [results valueForKeyPath:@"data.response"];//状态信息
-        
         if ([commandReceived count]) {//接收到命令
+           
+            NSLog(@"接收到收据的数量为：%lu", (unsigned long)commandReceived.count);
+            
             NSString  *numofString = (NSString *)[commandReceived objectAtIndex:0];
             NSInteger num = [numofString integerValue];
             NSLog(@"接收的数据是：%ld",(long)num);
             
+            //登录状态显示
             [self resultOfLoginToServer:num];
-            
-            if ([numofString isEqualToString:@"160"]) {
-                [self convertToGPSDataFromDictionary:results];
+
+            //检测状态信息中是否包含160
+            NSString *numOfString;
+            for (numOfString in commandReceived) {
+                if ([numOfString isEqualToString:@"160"]) {
+                    NSLog(@"＊＊＊＊＊＊有160数据＊＊＊＊＊＊＊＊");
+                    [self convertToGPSDataFromDictionary:results];
+                    break;
+                }
             }
+            
         }
         
         self.dataString = @"";
@@ -131,7 +174,7 @@
 {
     NSArray *dataReceivedArray = [resultsDictionary valueForKeyPath:@"data"];//地理坐标数据，是个数组，每个数组是一个时间点的数据字典
     NSLog(@"%@", dataReceivedArray);
-    NSLog(@"dataReceviedArray count is:%d", dataReceivedArray.count);
+    NSLog(@"dataReceviedArray count is:%lu", (unsigned long)dataReceivedArray.count);
     if ([dataReceivedArray count]) {
         
         if ([dataReceivedArray count] == 1) {//单用户连续定位
@@ -148,23 +191,14 @@
                 [self addAnnotationsToMapWithAnnotationCoordinate:locationDataNow andUserName:GPSUserName];//向地图上添加annotation
             }
             
-        } else if ([dataReceivedArray count] == 2) {
-            for (NSUInteger i = 0; i < 2; i ++) {
-                NSDictionary *dataReceivedDictionary = [dataReceivedArray objectAtIndex:i];
-                NSString *userName = [dataReceivedDictionary valueForKeyPath:@"userName"];
-                
-                CLLocationCoordinate2D GPRSLatitudeOfGCJ02 = [self dataDictionaryConvertedToCLLocationCoordinate2D:dataReceivedDictionary];//接收的经纬度数据字符串以度为单位表示
-                if ((GPRSLatitudeOfGCJ02.latitude > 0) && (GPRSLatitudeOfGCJ02.longitude > 50)) {
-                    [self initAnnotationWithCoordinate:GPRSLatitudeOfGCJ02 andUsername:userName];
-                }
-            }
-            [self addAnnotationsToMapWithAnnotationCoordinate];
-            
-        } else if ([dataReceivedArray count] > 2) {//历史轨迹定位
+        }  else if ([dataReceivedArray count] >= 2) {//历史轨迹定位
             
             NSLog(@"经纬度数据：%@", dataReceivedArray);
             NSLog(@"经纬度数据数量：%lu", (unsigned long)[dataReceivedArray count]);
             
+            /**
+             *  坐标点的数据量
+             */
             NSUInteger countOfDataReceived = [dataReceivedArray count];
             
             CLLocationCoordinate2D *coordinates = (CLLocationCoordinate2D *)malloc(countOfDataReceived * sizeof(CLLocationCoordinate2D));
@@ -176,16 +210,19 @@
                 userName = [dataReceivedDictionary valueForKeyPath:@"userName"];
                 
                 CLLocationCoordinate2D GPRSLatitudeOfGCJ02 = [self dataDictionaryConvertedToCLLocationCoordinate2D:dataReceivedDictionary];
-                
-                if ((GPRSLatitudeOfGCJ02.latitude > 0) && (GPRSLatitudeOfGCJ02.longitude > 50)) {
+                //我国经纬度的范围：纬度：3～53；经度：73～136
+                if ((GPRSLatitudeOfGCJ02.latitude > 3) && (GPRSLatitudeOfGCJ02.latitude < 54) && (GPRSLatitudeOfGCJ02.longitude > 73)&& (GPRSLatitudeOfGCJ02.longitude < 136)) {
                     
                     coordinates[j] = GPRSLatitudeOfGCJ02;
                     j++;
                 }
             }
             
-            //[self addAnnotationsToMapWithAnnotationCoordinate:coordinates[0] andUserName:userName];
-            [self addPolylinesToMapWithPolylinesCoordinates:coordinates coordinatesCount:countOfDataReceived];
+            NSLog(@"countOfDataReceived = %lu", (unsigned long)countOfDataReceived);
+            NSLog(@"j = %lu", (unsigned long)j);
+            //函数中coordinatesCount值为j而不是countOfDataReceived,原因是如果coordinates中有部分坐标不符合要求，经过上面if语句剔除掉了，因此coordinates数组中剩下的最后那些没有赋值的元素默认为零，不能将这些坐标值显示在地图轨迹上。
+            [self addPolylinesToMapWithPolylinesCoordinates:coordinates coordinatesCount:j];
+            NSLog(@"************调试标记，程序执行到此***************");
         }
         
     }
@@ -308,8 +345,12 @@
 - (void)addPolylinesToMapWithPolylinesCoordinates:(CLLocationCoordinate2D *)coordinates coordinatesCount:(NSUInteger)count
 {
     self.mapView.centerCoordinate = coordinates[0];
+    NSLog(@"************调试标记，程序执行到此，addPolylinesToMapWithPolylinesCoordinates111***************");
+
     self.commonPolyline = [MAPolyline polylineWithCoordinates:coordinates count:count];
+        NSLog(@"************调试标记，程序执行到此，addPolylinesToMapWithPolylinesCoordinates222***************");
     [self.mapView addOverlay:self.commonPolyline];
+        NSLog(@"************调试标记，程序执行到此，addPolylinesToMapWithPolylinesCoordinates333***************");
     free(coordinates), coordinates = NULL;
     
 }

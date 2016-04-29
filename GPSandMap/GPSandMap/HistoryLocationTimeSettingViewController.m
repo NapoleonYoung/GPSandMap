@@ -59,7 +59,7 @@
     //起始时间TextField
     CGRect startingTimeTextFieldRect = CGRectMake(self.startingTimeLabel.frame.origin.x + self.startingTimeLabel.frame.size.width, self.startingTimeLabel.frame.origin.y, screenWidth - 30 - self.startingTimeLabel.frame.size.width, 30);
     self.startingTimeTextField = [self makeTextFieldWithRect:startingTimeTextFieldRect placeholder:@"151208201112"];
-    self.startingTimeTextField.text = @"160315133000";
+    self.startingTimeTextField.text = @"160425201020";
     
     //终止时间Label
     CGRect endingTimeRect = CGRectMake(15, self.startingTimeLabel.frame.origin.y + self.startingTimeLabel.frame.size.height + 10, 90, 30);
@@ -68,7 +68,7 @@
     //终止时间TextField
     CGRect endingTimeTextFieldRect = CGRectMake(self.endingTimeLabel.frame.origin.x + self.endingTimeLabel.frame.size.width, self.endingTimeLabel.frame.origin.y, screenWidth - 30 - self.endingTimeLabel.frame.size.width, 30);
     self.endingTimeTextField = [self makeTextFieldWithRect:endingTimeTextFieldRect placeholder:@"160208201112"];
-    self.endingTimeTextField.text = @"160316133100";
+    self.endingTimeTextField.text = @"160425201205";
     
     //完成button
     UIButton *searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
