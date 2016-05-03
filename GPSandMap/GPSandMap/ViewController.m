@@ -128,6 +128,9 @@
     [self handlingReceivedDataNew];//处理接收到的数据
 }
 
+/**
+ *  处理接收到的数据，如果是完整的json包{"data“..}就处理
+ */
 - (void)handlingReceivedDataNew
 {
     NSString *receivedString = [[NSString alloc] initWithData:SOCKET.receivedData encoding:NSUTF8StringEncoding];
@@ -185,7 +188,7 @@
             NSDictionary *dataReceivedDictionary = [dataReceivedArray firstObject];
             NSString *GPSUserName = [dataReceivedDictionary valueForKeyPath:@"userName"];
             
-            CLLocationCoordinate2D locationDataNow = [self dataDictionaryConvertedToCLLocationCoordinate2D:dataReceivedDictionary];
+            CLLocationCoordinate2D locationDataNow = [self dataDictionaryConvertedToCLLocationCoordinate2D:dataReceivedDictionary continuous:YES];
             
             if ((locationDataNow.latitude > 0) && (locationDataNow.longitude > 50)) {
                 [self addAnnotationsToMapWithAnnotationCoordinate:locationDataNow andUserName:GPSUserName];//向地图上添加annotation
@@ -209,7 +212,7 @@
                 
                 userName = [dataReceivedDictionary valueForKeyPath:@"userName"];
                 
-                CLLocationCoordinate2D GPRSLatitudeOfGCJ02 = [self dataDictionaryConvertedToCLLocationCoordinate2D:dataReceivedDictionary];
+                CLLocationCoordinate2D GPRSLatitudeOfGCJ02 = [self dataDictionaryConvertedToCLLocationCoordinate2D:dataReceivedDictionary continuous:NO];
                 //我国经纬度的范围：纬度：3～53；经度：73～136
                 if ((GPRSLatitudeOfGCJ02.latitude > 3) && (GPRSLatitudeOfGCJ02.latitude < 54) && (GPRSLatitudeOfGCJ02.longitude > 73)&& (GPRSLatitudeOfGCJ02.longitude < 136)) {
                     
@@ -229,13 +232,14 @@
 }
 
 /**
- *  将数据字典转换为地图可识别的GPS坐标
+ *  将数据字典转换为地图可识别的GPS坐标，如果是实时定位，没有GPS坐标就读取GPRS坐标；如果是历史轨迹，只读取GPS坐标
  *
  *  @param dataDictionary 数据字典
+ *  @param continuous 是否是实时定位，不是就为历史轨迹
  *
  *  @return 地图可识别的GPS坐标
  */
-- (CLLocationCoordinate2D)dataDictionaryConvertedToCLLocationCoordinate2D:(NSDictionary *)dataDictionary
+- (CLLocationCoordinate2D)dataDictionaryConvertedToCLLocationCoordinate2D:(NSDictionary *)dataDictionary continuous:(BOOL)continuous
 {
     
     NSString *latitudeString = @"0";
@@ -247,14 +251,21 @@
     NSString *GPSLatitudeString = [dataDictionary valueForKeyPath:@"GPSLatitude"];//纬度字符
     NSString *GPSLongitudeString = [dataDictionary valueForKeyPath:@"GPSLongitude"];//经度字符
     
-    
-    if ((![GPSLatitudeString isEqualToString:@"0"]) && (![GPSLongitudeString isEqualToString:@"0"])) {
+    if (continuous) {//实时定位
+        //没有GPS坐标，就读取GPRS坐标
+        if ((![GPSLatitudeString isEqualToString:@"0"]) && (![GPSLongitudeString isEqualToString:@"0"])) {
+            latitudeString = GPSLatitudeString;
+            longitudeString = GPSLongitudeString;
+        } else if ((![GPRSLatitudeString isEqualToString:@"0"]) && (![GPRSLongitudeString isEqualToString:@"0"])) {
+            latitudeString = GPRSLatitudeString;
+            longitudeString = GPRSLongitudeString;
+        }
+    } else {//历史轨迹查看
+        //历史轨迹只读取GPS坐标
         latitudeString = GPSLatitudeString;
         longitudeString = GPSLongitudeString;
-    } else if ((![GPRSLatitudeString isEqualToString:@"0"]) && (![GPRSLongitudeString isEqualToString:@"0"])) {
-        latitudeString = GPRSLatitudeString;
-        longitudeString = GPRSLongitudeString;
     }
+    
     
     //CLLocationCoordinate2D locationDataNow = [self wgs84ToGcj02WithLatitudeString:GPRSLatitudeString andLongitudeString:GPRSLongitudeString];//接收的经纬度数据字符串以度分为单位表示
     

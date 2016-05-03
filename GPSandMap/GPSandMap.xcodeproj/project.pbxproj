@@ -535,11 +535,13 @@
 			baseConfigurationReference = 09E8E25B2DBADB46D9C92A44 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Nan Yang (3C58JZ5N58)";
 				INFOPLIST_FILE = GPSandMap/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.sdu.doublewood.ny.GPSandMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "7e0219ba-fc21-458b-89ae-5485f3cae315";
 			};
 			name = Debug;
 		};
@@ -548,11 +550,13 @@
 			baseConfigurationReference = 7D5E771F3B90307FABDC695D /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Nan Yang (3C58JZ5N58)";
 				INFOPLIST_FILE = GPSandMap/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.sdu.doublewood.ny.GPSandMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "7e0219ba-fc21-458b-89ae-5485f3cae315";
 			};
 			name = Release;
 		};
