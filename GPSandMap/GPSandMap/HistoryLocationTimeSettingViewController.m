@@ -26,6 +26,8 @@
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
+    
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.title = @"历史轨迹查询";
@@ -59,7 +61,12 @@
     //起始时间TextField
     CGRect startingTimeTextFieldRect = CGRectMake(self.startingTimeLabel.frame.origin.x + self.startingTimeLabel.frame.size.width, self.startingTimeLabel.frame.origin.y, screenWidth - 30 - self.startingTimeLabel.frame.size.width, 30);
     self.startingTimeTextField = [self makeTextFieldWithRect:startingTimeTextFieldRect placeholder:@"151208201112"];
-    self.startingTimeTextField.text = @"160425201020";
+    
+    if ([self readNSUserDefaults:@"startingTimeTextField"]) {
+        self.startingTimeTextField.text = [self readNSUserDefaults:@"startingTimeTextField"];
+    } else {
+        self.startingTimeTextField.text = @"";
+    }
     
     //终止时间Label
     CGRect endingTimeRect = CGRectMake(15, self.startingTimeLabel.frame.origin.y + self.startingTimeLabel.frame.size.height + 10, 90, 30);
@@ -68,7 +75,11 @@
     //终止时间TextField
     CGRect endingTimeTextFieldRect = CGRectMake(self.endingTimeLabel.frame.origin.x + self.endingTimeLabel.frame.size.width, self.endingTimeLabel.frame.origin.y, screenWidth - 30 - self.endingTimeLabel.frame.size.width, 30);
     self.endingTimeTextField = [self makeTextFieldWithRect:endingTimeTextFieldRect placeholder:@"160208201112"];
-    self.endingTimeTextField.text = @"160425201205";
+    if ([self readNSUserDefaults:@"endingTimeTextField"]) {
+        self.endingTimeTextField.text = [self readNSUserDefaults:@"endingTimeTextField"];
+    } else {
+        self.endingTimeTextField.text = @"";
+    }
     
     //完成button
     UIButton *searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -93,7 +104,13 @@
  */
 - (void)searchButtonClicked
 {
-    if (self.startingTimeTextField.text != nil && self.endingTimeTextField.text != nil ) {
+    if (self.startingTimeTextField.text.length && self.endingTimeTextField.text.length ) {
+        
+        //首先将起止时间保存到NSUserDefault中
+        [self saveNSUserDefaults:self.startingTimeTextField.text key:@"startingTimeTextField"];
+        [self saveNSUserDefaults:self.endingTimeTextField.text key:@"endingTimeTextField"];
+        [UserDefaults synchronize];
+        
         NSString *string = [self.startingTimeTextField.text stringByAppendingString:@","];
         NSString *historyTime = [string stringByAppendingString:self.endingTimeTextField.text];
         [self.delegate passValue:historyTime];
@@ -148,6 +165,67 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark - NSUserDefaults
+
+/**
+ *  将需要备份的数据保存到NSUserDefaults
+ *
+ *  @param valueString 需要被保存的值
+ *  @param keyString value对应的key
+ */
+- (void)saveNSUserDefaults:(NSString *)valueString key:(NSString *)keyString
+{
+    [UserDefaults setObject:valueString forKey:keyString];
+}
+
+/**
+ *  从NSUserDefaults读取之前设置过的值
+ *
+ *  @param keyString value对应的key
+ *
+ *  @return key对应的value
+ */
+- (NSString *)readNSUserDefaults:(NSString *)keyString
+{
+    return [UserDefaults objectForKey:keyString];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @end

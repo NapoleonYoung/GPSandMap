@@ -25,4 +25,7 @@
 
 #define navigationBarHeight 64
 
+//NSUserDefaults
+#define UserDefaults [NSUserDefaults standardUserDefaults]
+
 #endif /* Header_h */
