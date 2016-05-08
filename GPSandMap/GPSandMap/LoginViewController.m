@@ -11,7 +11,7 @@
 
 #import <MessageUI/MessageUI.h>//短信功能
 #import "Header.h"
-
+#import "NYKeychain.h"//keychain存储密码
 
 @interface LoginViewController ()<MFMessageComposeViewControllerDelegate>//发送短信需要委托
 
@@ -63,7 +63,7 @@
     
     //用户名，密码
     self.userNameTextField.text = @"gxy3k";
-    self.userKeywordTextField.text = @"gxy3k";
+    //self.userKeywordTextField.text = @"gxy3k";
     self.phoneNumberTextField.text = @"18769781618";
     
     self.dataString = @"";
@@ -105,6 +105,10 @@
 - (IBAction)loginToServer:(id)sender
 {
     [self.view endEditing:YES];//首先消掉键盘
+
+    if (self.userKeywordTextField.text.length) {
+        [NYKeychain setPassword:self.userKeywordTextField.text forService:ServiceName account:self.userNameTextField.text];
+    }
 
     if (([self.userKeywordTextField.text length] > 0)&([self.userNameTextField.text length] > 0)) {
         NSString *string = [NSString stringWithFormat:@"310,%@,%@#",self.userNameTextField.text,self.userKeywordTextField.text];
@@ -340,6 +344,22 @@
 
         default:
             break;
+    }
+}
+
+#pragma mark - textfiled
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [super textFieldDidEndEditing:textField];
+    
+    if (textField == self.userNameTextField) {
+        NSString *myPassword = [NYKeychain passwordForService:ServiceName account:self.userNameTextField.text];
+        if (myPassword) {
+            self.userKeywordTextField.text = myPassword;
+        } else {
+            NSLog(@"之前没有存储过该账户的密码");
+        }
     }
 }
 

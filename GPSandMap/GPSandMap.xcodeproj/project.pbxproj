@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0A00B32E1C96A39200F74F77 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A00B32D1C96A39200F74F77 /* main.m */; };
 		0A00B3311C96A39200F74F77 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A00B3301C96A39200F74F77 /* AppDelegate.m */; };
-		0A00B3341C96A39200F74F77 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A00B3331C96A39200F74F77 /* ViewController.m */; };
 		0A00B3371C96A39200F74F77 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A00B3351C96A39200F74F77 /* Main.storyboard */; };
 		0A00B3391C96A39200F74F77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A00B3381C96A39200F74F77 /* Assets.xcassets */; };
 		0A00B33C1C96A39200F74F77 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A00B33A1C96A39200F74F77 /* LaunchScreen.storyboard */; };
@@ -20,6 +19,10 @@
 		0A00B36D1C96B19300F74F77 /* NetWork.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A00B3681C96B19300F74F77 /* NetWork.m */; };
 		0A00B36E1C96B19300F74F77 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A00B36A1C96B19300F74F77 /* GCDAsyncSocket.m */; };
 		0A00B36F1C96B19300F74F77 /* JZLocationConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A00B36C1C96B19300F74F77 /* JZLocationConverter.m */; };
+		0A1FEBFB1CDC3696004C30E2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A1FEBFA1CDC3696004C30E2 /* Security.framework */; };
+		0A5C16081CDF665A00BAAAC9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A5C16071CDF665A00BAAAC9 /* ViewController.m */; };
+		0A5C16121CDF677A00BAAAC9 /* NYKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A5C160F1CDF677A00BAAAC9 /* NYKeychain.m */; };
+		0A5C16131CDF677A00BAAAC9 /* NYKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A5C16111CDF677A00BAAAC9 /* NYKeychainQuery.m */; };
 		0ACA1D6A1CAA26E500AE7B6C /* ShowTextFieldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACA1D691CAA26E500AE7B6C /* ShowTextFieldViewController.m */; };
 		8829BCE4C811DEC815195DF9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BC53BB9A279EA12642A2EB9 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -47,8 +50,6 @@
 		0A00B32D1C96A39200F74F77 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0A00B32F1C96A39200F74F77 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0A00B3301C96A39200F74F77 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		0A00B3321C96A39200F74F77 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		0A00B3331C96A39200F74F77 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		0A00B3361C96A39200F74F77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0A00B3381C96A39200F74F77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A00B33B1C96A39200F74F77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -59,7 +60,7 @@
 		0A00B34D1C96A39300F74F77 /* GPSandMapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GPSandMapUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A00B3511C96A39300F74F77 /* GPSandMapUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GPSandMapUITests.m; sourceTree = "<group>"; };
 		0A00B3531C96A39300F74F77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0A00B35F1C96A41800F74F77 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
+		0A00B35F1C96A41800F74F77 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Header.h; path = ../Header.h; sourceTree = "<group>"; };
 		0A00B3601C96B0C600F74F77 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		0A00B3611C96B0C600F74F77 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		0A00B3621C96B0C600F74F77 /* HistoryLocationTimeSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryLocationTimeSettingViewController.h; sourceTree = "<group>"; };
@@ -71,6 +72,13 @@
 		0A00B36A1C96B19300F74F77 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		0A00B36B1C96B19300F74F77 /* JZLocationConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZLocationConverter.h; sourceTree = "<group>"; };
 		0A00B36C1C96B19300F74F77 /* JZLocationConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZLocationConverter.m; sourceTree = "<group>"; };
+		0A1FEBFA1CDC3696004C30E2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		0A5C16061CDF665A00BAAAC9 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		0A5C16071CDF665A00BAAAC9 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		0A5C160E1CDF677A00BAAAC9 /* NYKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYKeychain.h; sourceTree = "<group>"; };
+		0A5C160F1CDF677A00BAAAC9 /* NYKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYKeychain.m; sourceTree = "<group>"; };
+		0A5C16101CDF677A00BAAAC9 /* NYKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYKeychainQuery.h; sourceTree = "<group>"; };
+		0A5C16111CDF677A00BAAAC9 /* NYKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYKeychainQuery.m; sourceTree = "<group>"; };
 		0ACA1D681CAA26E500AE7B6C /* ShowTextFieldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowTextFieldViewController.h; sourceTree = "<group>"; };
 		0ACA1D691CAA26E500AE7B6C /* ShowTextFieldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowTextFieldViewController.m; sourceTree = "<group>"; };
 		7D5E771F3B90307FABDC695D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -82,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A1FEBFB1CDC3696004C30E2 /* Security.framework in Frameworks */,
 				8829BCE4C811DEC815195DF9 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -106,7 +115,6 @@
 		0A00B3201C96A39200F74F77 = {
 			isa = PBXGroup;
 			children = (
-				0A00B35F1C96A41800F74F77 /* Header.h */,
 				0A00B32B1C96A39200F74F77 /* GPSandMap */,
 				0A00B3451C96A39200F74F77 /* GPSandMapTests */,
 				0A00B3501C96A39300F74F77 /* GPSandMapUITests */,
@@ -129,22 +137,13 @@
 		0A00B32B1C96A39200F74F77 /* GPSandMap */ = {
 			isa = PBXGroup;
 			children = (
+				0A00B35F1C96A41800F74F77 /* Header.h */,
 				0A00B32F1C96A39200F74F77 /* AppDelegate.h */,
 				0A00B3301C96A39200F74F77 /* AppDelegate.m */,
-				0A00B3321C96A39200F74F77 /* ViewController.h */,
-				0A00B3331C96A39200F74F77 /* ViewController.m */,
-				0A00B3601C96B0C600F74F77 /* LoginViewController.h */,
-				0A00B3611C96B0C600F74F77 /* LoginViewController.m */,
-				0A00B3621C96B0C600F74F77 /* HistoryLocationTimeSettingViewController.h */,
-				0A00B3631C96B0C600F74F77 /* HistoryLocationTimeSettingViewController.m */,
-				0A00B3641C96B0C600F74F77 /* HistoryLocationTimeDelegate.h */,
 				0A00B3351C96A39200F74F77 /* Main.storyboard */,
-				0ACA1D681CAA26E500AE7B6C /* ShowTextFieldViewController.h */,
-				0ACA1D691CAA26E500AE7B6C /* ShowTextFieldViewController.m */,
-				0A00B3701C96B19B00F74F77 /* NetWork */,
-				0A00B3381C96A39200F74F77 /* Assets.xcassets */,
-				0A00B33A1C96A39200F74F77 /* LaunchScreen.storyboard */,
-				0A00B33D1C96A39200F74F77 /* Info.plist */,
+				0A5C16021CDF64D400BAAAC9 /* Login */,
+				0A5C16091CDF668900BAAAC9 /* Map */,
+				0A5C160B1CDF66C300BAAAC9 /* HistoryLocationTimeSetting */,
 				0A00B32C1C96A39200F74F77 /* Supporting Files */,
 			);
 			path = GPSandMap;
@@ -153,7 +152,10 @@
 		0A00B32C1C96A39200F74F77 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0A00B33A1C96A39200F74F77 /* LaunchScreen.storyboard */,
 				0A00B32D1C96A39200F74F77 /* main.m */,
+				0A00B3381C96A39200F74F77 /* Assets.xcassets */,
+				0A00B33D1C96A39200F74F77 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -183,10 +185,93 @@
 				0A00B3681C96B19300F74F77 /* NetWork.m */,
 				0A00B3691C96B19300F74F77 /* GCDAsyncSocket.h */,
 				0A00B36A1C96B19300F74F77 /* GCDAsyncSocket.m */,
-				0A00B36B1C96B19300F74F77 /* JZLocationConverter.h */,
-				0A00B36C1C96B19300F74F77 /* JZLocationConverter.m */,
 			);
 			name = NetWork;
+			sourceTree = "<group>";
+		};
+		0A5C16021CDF64D400BAAAC9 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				0A5C16051CDF65D700BAAAC9 /* Model */,
+				0A5C16031CDF65B600BAAAC9 /* ViewController */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		0A5C16031CDF65B600BAAAC9 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0ACA1D681CAA26E500AE7B6C /* ShowTextFieldViewController.h */,
+				0ACA1D691CAA26E500AE7B6C /* ShowTextFieldViewController.m */,
+				0A00B3601C96B0C600F74F77 /* LoginViewController.h */,
+				0A00B3611C96B0C600F74F77 /* LoginViewController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		0A5C16051CDF65D700BAAAC9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0A00B36B1C96B19300F74F77 /* JZLocationConverter.h */,
+				0A00B36C1C96B19300F74F77 /* JZLocationConverter.m */,
+				0A5C16141CDF678100BAAAC9 /* KeyChain */,
+				0A00B3701C96B19B00F74F77 /* NetWork */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		0A5C16091CDF668900BAAAC9 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				0A5C160A1CDF669900BAAAC9 /* ViewController */,
+			);
+			name = Map;
+			sourceTree = "<group>";
+		};
+		0A5C160A1CDF669900BAAAC9 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0A5C16061CDF665A00BAAAC9 /* ViewController.h */,
+				0A5C16071CDF665A00BAAAC9 /* ViewController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		0A5C160B1CDF66C300BAAAC9 /* HistoryLocationTimeSetting */ = {
+			isa = PBXGroup;
+			children = (
+				0A5C160D1CDF670000BAAAC9 /* Model */,
+				0A5C160C1CDF66F100BAAAC9 /* ViewController */,
+			);
+			name = HistoryLocationTimeSetting;
+			sourceTree = "<group>";
+		};
+		0A5C160C1CDF66F100BAAAC9 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0A00B3621C96B0C600F74F77 /* HistoryLocationTimeSettingViewController.h */,
+				0A00B3631C96B0C600F74F77 /* HistoryLocationTimeSettingViewController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		0A5C160D1CDF670000BAAAC9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0A00B3641C96B0C600F74F77 /* HistoryLocationTimeDelegate.h */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		0A5C16141CDF678100BAAAC9 /* KeyChain */ = {
+			isa = PBXGroup;
+			children = (
+				0A5C160E1CDF677A00BAAAC9 /* NYKeychain.h */,
+				0A5C160F1CDF677A00BAAAC9 /* NYKeychain.m */,
+				0A5C16101CDF677A00BAAAC9 /* NYKeychainQuery.h */,
+				0A5C16111CDF677A00BAAAC9 /* NYKeychainQuery.m */,
+			);
+			name = KeyChain;
 			sourceTree = "<group>";
 		};
 		1159A1832ABB0155EE7410F0 /* Pods */ = {
@@ -201,6 +286,7 @@
 		C442766DE9A99B146F84FD75 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0A1FEBFA1CDC3696004C30E2 /* Security.framework */,
 				9BC53BB9A279EA12642A2EB9 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -276,6 +362,7 @@
 				TargetAttributes = {
 					0A00B3281C96A39200F74F77 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = Z8MHZHVT2X;
 					};
 					0A00B3411C96A39200F74F77 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -387,12 +474,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A5C16121CDF677A00BAAAC9 /* NYKeychain.m in Sources */,
+				0A5C16081CDF665A00BAAAC9 /* ViewController.m in Sources */,
 				0A00B3651C96B0C600F74F77 /* LoginViewController.m in Sources */,
-				0A00B3341C96A39200F74F77 /* ViewController.m in Sources */,
 				0ACA1D6A1CAA26E500AE7B6C /* ShowTextFieldViewController.m in Sources */,
 				0A00B3311C96A39200F74F77 /* AppDelegate.m in Sources */,
 				0A00B3661C96B0C600F74F77 /* HistoryLocationTimeSettingViewController.m in Sources */,
 				0A00B36D1C96B19300F74F77 /* NetWork.m in Sources */,
+				0A5C16131CDF677A00BAAAC9 /* NYKeychainQuery.m in Sources */,
 				0A00B36F1C96B19300F74F77 /* JZLocationConverter.m in Sources */,
 				0A00B36E1C96B19300F74F77 /* GCDAsyncSocket.m in Sources */,
 				0A00B32E1C96A39200F74F77 /* main.m in Sources */,

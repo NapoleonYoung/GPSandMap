@@ -28,4 +28,7 @@
 //NSUserDefaults
 #define UserDefaults [NSUserDefaults standardUserDefaults]
 
+//Keychain
+#define ServiceName  @"GPSandMap"
+
 #endif /* Header_h */
